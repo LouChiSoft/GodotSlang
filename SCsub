@@ -1,0 +1,15 @@
+import pathlib
+
+Import('env')
+
+env_slang = env.Clone()
+
+env_slang.add_source_files(env.modules_sources, "*.cpp")
+env_slang.Append(CPPPATH=[env_slang.Dir("external/include")])
+
+module_path = pathlib.Path(Dir(".").abspath)
+env_slang.Append(LIBPATH=[module_path / "external/lib"])
+env_slang.Append(LIBS=["slang", "slang-rt", "gfx"])
+
+# env_slang.Append(LIBPATH=[env_slang.Dir("external/lib")])
+# env_slang.Append(CCFLAGS=['slang.lib'])
